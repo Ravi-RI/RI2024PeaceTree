@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room [user entered number] Peace Tree</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="tree-container">
+        <img src="tree.png" class="tree" alt="Tree">
+    </div>
+
+    <!-- Container for inputs and buttons -->
+    <div class="input-container">
+        <!-- Input for adding leaves -->
+        <input type="text" id="leaf-message" placeholder="Enter a message for the leaf">
+        <button onclick="addLeaf()">Add Leaf</button>
+    </div>
+
+    <div class="input-container">
+        <!-- Input for removing leaves (code 333) -->
+        <input type="password" id="remove-code" placeholder="Enter code to remove leaves">
+        <button onclick="removeAllLeaves()">Remove Leaves</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <hr>
+        <p>Designed by Ravi Sharma, Remuera Intermediate School</p>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadLeaves();
+            addBird();
+            setRoomTitle();
+        });
+
+        function setRoomTitle() {
+            const roomNumber = localStorage.getItem('roomNumber');
+            if (roomNumber) {
+                document.title = `Room ${roomNumber} Peace Tree`;
+                const header = document.createElement('h1');
+                header.textContent = `Room ${roomNumber} Peace Tree`;
+                document.body.prepend(header);
+            }
+        }
+    </script>
+</body>
+</html>

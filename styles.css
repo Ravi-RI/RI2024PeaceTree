@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Ensures footer stays at the bottom */
+    height: 100vh;
+    background-color: #f0f8ff;
+    font-family: Arial, sans-serif;
+}
+
+.tree-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tree {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    border: none;
+}
+
+.leaf {
+    position: absolute;
+    min-width: 80px;
+    padding: 10px;
+    background-color: green;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transform-origin: center;
+    word-wrap: break-word;
+    z-index: 1;
+}
+
+.bird {
+    position: absolute;
+    width: 90px; /* Original size */
+    height: 90px; /* Original size */
+    background-image: url('bird.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.heart {
+    position: absolute;
+    width: 90px; /* Original size */
+    height: 90px; /* Original size */
+    background-image: url('heart.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2;
+}
+
+input[type="text"],
+input[type="password"] {
+    margin: 5px; /* Reduced margin */
+    padding: 5px;
+    font-size: 16px;
+}
+
+button {
+    margin: 5px; /* Reduced margin */
+    padding: 8px 12px; /* Adjusted padding */
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Container for inputs and buttons */
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px; /* Adjust margin to move inputs and buttons up */
+}
+
+.input-container input[type="text"],
+.input-container input[type="password"] {
+    flex: 1;
+}
+
+.input-container button {
+    margin-left: 10px; /* Space between input and button */
+}
+
+/* Footer styles */
+.footer {
+    width: 100%;
+    background-color: #f0f8ff;
+    text-align: center;
+    padding: 5px;
+}
+
+.footer hr {
+    border: none;
+    height: 1px;
+    background-color: #000;
+    margin-bottom: 5px;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 10; /* Bring the room number input in front */
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+    border: 2px solid #4CAF50; /* Optional border color */
+}
+
+.peace-symbol {
+    position: absolute;
+    z-index: 0; /* Keeps peace symbols behind the container */
+    opacity: 0.8;
+    /* other styles for positioning the peace symbols */
+}
+
+.footer p {
+    font-size: 8px; /* Four sizes smaller */
+    color: #000;
+}

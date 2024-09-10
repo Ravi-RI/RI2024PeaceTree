@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Room Number</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            z-index: 2; /* Ensure it's above the peace symbols */
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100px;
+            margin: 10px;
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly darker background */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .intro-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .peace-icon {
+            position: absolute;
+            width: 100px; /* Initial size */
+            height: 100px; /* Initial size */
+            z-index: 1; /* Behind the input and button */
+            cursor: pointer;
+            object-fit: contain; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="intro-title">Enter Room Number:</h1>
+        <input type="number" id="room-number" placeholder="Room Number" min="1" max="30">
+        <button onclick="submitRoomNumber()">Submit</button>
+        <div id="error-message" class="error"></div>
+    </div>
+
+    <img src="peace.png" class="peace-icon" id="peace-icon" alt="Peace Icon" style="top: 10%; left: 10%;">
+
+    <script>
+        function submitRoomNumber() {
+            const roomNumber = document.getElementById('room-number').value;
+            const errorMessage = document.getElementById('error-message');
+
+            if (roomNumber < 1 || roomNumber > 30) {
+                errorMessage.textContent = 'Please enter a room number between 1 and 30.';
+            } else {
+                errorMessage.textContent = '';
+                localStorage.setItem('roomNumber', roomNumber);
+                window.location.href = 'index.html'; // Redirect to the main page
+            }
+        }
+
+        function playSound() {
+            const audio = new Audio('tibetan-bell.mp3'); // Ensure this path is correct
+            audio.play();
+        }
+
+        function createPeaceSymbol() {
+            const peaceSymbol = document.createElement('img');
+            peaceSymbol.src = 'peace.png'; // Ensure this path is correct
+            peaceSymbol.className = 'peace-icon';
+            peaceSymbol.style.width = `${Math.random() * 100 + 50}px`; // Random width between 50 and 150 px
+            peaceSymbol.style.height = `${Math.random() * 100 + 50}px`; // Random height between 50 and 150 px
+            peaceSymbol.style.top = `${Math.random() * 80 + 10}vh`; // Random vertical position within 10% to 90% of the viewport height
+            peaceSymbol.style.left = `${Math.random() * 80 + 10}vw`; // Random horizontal position within 10% to 90% of the viewport width
+            peaceSymbol.style.transition = 'transform 0.5s ease'; // Smooth transition
+
+            peaceSymbol.addEventListener('click', () => {
+                peaceSymbol.style.transform = 'scale(2)'; // Double size
+                setTimeout(() => {
+                    peaceSymbol.style.transform = 'scale(1)'; // Shrink back
+                }, 500);
+                playSound();
+                setTimeout(() => {
+                    peaceSymbol.remove();
+                    createPeaceSymbol(); // Create a new peace symbol
+                }, 500);
+            });
+
+            document.body.appendChild(peaceSymbol);
+        }
+
+        document.getElementById('peace-icon').addEventListener('click', () => {
+            createPeaceSymbol(); // Create initial peace symbol when clicked
+            playSound();
+        });
+    </script>
+</body>
+</html>
